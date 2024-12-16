@@ -21,7 +21,7 @@
                 <p>Une breve description du projet</p>
             </div>
         </div>
-        <div>
+        <div class="table-container">
             <table>
                 <thead>
                     <tr>

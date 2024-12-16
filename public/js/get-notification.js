@@ -1,49 +1,83 @@
-var order = []
-$(document).ready( () => {
-    
+var orders = []
+$(document).ready(() => {
+
     getLocalStorage();
+    var row = ''
 
-    $(".command-container").click( () => {
-        row
-    }
+    //Requete initial
+    updateRequest("http://192.168.0.100:8090/get-notification/command")
+    // Requette répété à interval regulier apres 7.5 seconde
+    setInterval(updateRequest, 7500, "http://192.168.0.100:8090/get-notification/command")
 
-    );
+})
+
+function updateRequest(url) {
     $.ajax({
-        url: "http://192.168.0.100:8090/get-notification/command",
+        url: url,
         method: "GET",
         data: {},
         success: function (data) {
             data.forEach(e => {
-                
+
             });
             update(data)
         }
     });
-    console.log("fin de la quete ajax");
+    console.log("fin de la quete ajax, mise a jour du contenue ...");
 
-})
+    var row = ""
+
+    orders.forEach(order => {
+        row += "<table>"
+        row += "<caption> Commande numéro :" + orders.indexOf(order) + "</caption>"
+        row += "<thead> " +
+                "<tr>" +
+                    "<td> Nom des produit </td>" +
+                    "<td> Detail de commande </td>" +
+                    "<td> Quantité </td>" +
+                    "<td> ETAT </td>" +
+                "</tr>" +
+            "</thead>"
+        order.forEach(product => {
+            product.forEach(item => {
+                row += '<tr>' +
+                    '<td>' + item.product_name + '</td>'+
+                    '<td>' + "item." + '</td>'+
+                    '<td>' + item.product_qte + '</td>'+
+                    '<td>' + "En cours de livraison" + '</td>'
+                    + '</tr>'
+            });
+        });
+        row += "</table>"
+    });
+    
+
+    var tableContainer = document.querySelector('.table-container')
+    tableContainer.innerHTML = ''
+    tableContainer.innerHTML = row
+}
 
 
-async function update(data) {
-    var subOrder = data  
+function update(data) {
+    var suborders = data
 
     // si il y a de nouvelles commandes alors ...
-    if(data.length != 0) {
-        order.push(subOrder)
-        console.log(order)
+    if (data.length != 0) {
+        orders.push(suborders)
+        console.log(orders)
     }
 
-    localStorage.order = JSON.stringify(order) 
+    localStorage.orders = JSON.stringify(orders)
 }
 
 
 function getLocalStorage() {
-    if(localStorage.order) {
-        order = JSON.parse(localStorage.order) ;
-        console.log("Recuperation dans le localstorage de 'order'")
+    if (localStorage.orders) {
+        orders = JSON.parse(localStorage.orders);
+        console.log("Recuperation dans le localstorage de 'orders'")
     }
     else {
-        localStorage.setItem('order', JSON.stringify(order))
-        console.log("Creation dans le localstorage de 'order'")
+        localStorage.setItem('orders', JSON.stringify(orders))
+        console.log("Creation dans le localstorage de 'orders'")
     }
 }
