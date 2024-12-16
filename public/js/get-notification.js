@@ -1,4 +1,7 @@
+var order = []
 $(document).ready( () => {
+    
+    getLocalStorage();
 
     $(".command-container").click( () => {
         row
@@ -6,7 +9,7 @@ $(document).ready( () => {
 
     );
     $.ajax({
-        url: "http://192.168.0.105:8090/get-notification/command",
+        url: "http://192.168.0.100:8090/get-notification/command",
         method: "GET",
         data: {},
         success: function (data) {
@@ -22,20 +25,25 @@ $(document).ready( () => {
 
 
 async function update(data) {
-    var order = []
-    var subOrder = []
+    var subOrder = data  
 
-    if(localStorage.order) {
-        order = JSON.parse(localStorage.order) 
-    }
-
+    // si il y a de nouvelles commandes alors ...
     if(data.length != 0) {
-        for (const i in data) {
-            order.push(data[i])
-        }
+        order.push(subOrder)
+        console.log(order)
     }
-    console.log(order)
 
     localStorage.order = JSON.stringify(order) 
-    console.log(order)
+}
+
+
+function getLocalStorage() {
+    if(localStorage.order) {
+        order = JSON.parse(localStorage.order) ;
+        console.log("Recuperation dans le localstorage de 'order'")
+    }
+    else {
+        localStorage.setItem('order', JSON.stringify(order))
+        console.log("Creation dans le localstorage de 'order'")
+    }
 }

@@ -32,7 +32,6 @@
                     </tr>
                 </thead>
                 <tbody class="command-container">
-
                     <tr>
                         
                     </tr>
