@@ -6,7 +6,7 @@ $(document).ready( () => {
 
     );
     $.ajax({
-        url: "http://localhost:8090/get-notification/command",
+        url: "http://192.168.0.105:8090/get-notification/command",
         method: "GET",
         data: {},
         success: function (data) {
@@ -29,7 +29,7 @@ async function update(data) {
         order = JSON.parse(localStorage.order) 
     }
 
-    if(date.length != 0) {
+    if(data.length != 0) {
         for (const i in data) {
             order.push(data[i])
         }
