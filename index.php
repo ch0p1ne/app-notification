@@ -22,6 +22,14 @@ if(isset($_SESSION['provider_name']))
     <link rel="stylesheet" href="public/css/basic.css">
     <script src="./public/js/jquery-2.1.1.min.js" defer></script>
     <script src="./public/js/get-notification.js" defer></script>
+    
+    <script type="text/javascript">
+        // Définir les variables globales avec les données PHP
+        var order_queue = <?php echo json_encode($_SESSION['order_queue']); ?>;
+        var provider_name = <?php echo json_encode($_SESSION['provider_name']); ?>;
+        var user_position = <?php echo json_encode($_SESSION['sess_userrole']); ?>;
+    </script>
+    
     <title>Accueil</title>
 </head>
 

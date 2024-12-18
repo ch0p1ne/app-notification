@@ -1,5 +1,9 @@
 var orders = []
 $(document).ready(() => {
+    console.log(order_queue);
+    console.log(provider_name);
+    console.log(user_position);
+    
 
     getLocalStorage();
     var row = ''

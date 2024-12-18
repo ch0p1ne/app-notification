@@ -32,12 +32,9 @@ if ( isset( $_POST['email'] ) && isset( $_POST['password'] ) ) {
 		// # Ajoute en session du non du fournisseur 
 		// ~ SI l'utilisateur est un fournisseur aussi
 		if($provider) {
-			if($user['positon'] == 'admin') {
+			if(isset($user['positon']) && $user['positon'] == 'user') {
 
-				// VIOLATION DE LA POLITIQUE d'utilisation, un admin ne doit pas avoir un compte
-				// qui est aussi fournisseur, ce sont des comptes fournie pour travailler
-				//  pas pour commercer, il faut creer un compte distinct alors
-				$_SESSION['violation'] = "Votre compte va etre bannis definitivement";
+				$_SESSION['violation'] = "Votre compte risque d'etre bannis definitivement";
 			}
 			$_SESSION['provider_name'] = $provider['provider_name']; 
 
@@ -59,7 +56,7 @@ if ( isset( $_POST['email'] ) && isset( $_POST['password'] ) ) {
         $_SESSION['sess_userrole'] = $user['position']; 
  
 
-		if( $_SESSION['sess_userrole'] == "admin1") {
+		if( $_SESSION['sess_userrole'] == "provider") {
 			header('Location: /app-notification');
 		}
 		
@@ -67,9 +64,6 @@ if ( isset( $_POST['email'] ) && isset( $_POST['password'] ) ) {
 			header('Location: /app-notification');
 		}
 		
-		elseif( $_SESSION['sess_userrole'] == "casher") {
-			header('Location: main44/index.php');
-		}
 		
 		// elseif( $_SESSION['sess_userrole'] == "casher") {
 			// header('Location: main1/pos_web/basic2.php');
