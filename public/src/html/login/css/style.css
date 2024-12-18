@@ -1,0 +1,50 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+.card_padding {
+  padding: 5%;
+}
+.article{
+  align-self: stretch;
+}
+.article-row {
+  display: flex; /* or inline-flex */
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  align-content: stretch;
+  padding-right: 1%;
+}
+.btn-pad{
+  align-self: stretch;
+}
+.article-row {
+  display: flex; /* or inline-flex */
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  align-content: stretch;
+}
+.card-row{
+  margin-bottom: 0 !important;
+}
+input[type=color]{
+	width: 100%;
+	height: 40px;
+	border: none;
+	border-radius: 40px;
+	background: none;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+	border: solid 1px #000; /*change color of the swatch border here*/
+	border-radius: 40px;
+}
