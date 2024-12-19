@@ -1,5 +1,6 @@
 var orders = []
 $(document).ready(() => {
+    var updateFrequency = 10500;
     console.log(order_queue);
     console.log(provider_name);
     console.log(user_position);
@@ -7,23 +8,33 @@ $(document).ready(() => {
 
     getLocalStorage();
     var row = ''
+    const urlJax = "http://127.0.0.1:8090/get-notification/command"
 
     //Requete initial
-    updateRequest("http://192.168.0.100:8090/get-notification/command")
+    updateRequest(urlJax)
     // Requette répété à interval regulier apres 7.5 seconde
-    setInterval(updateRequest, 7500, "http://192.168.0.100:8090/get-notification/command")
+    setInterval(updateRequest, updateFrequency, urlJax)
 
 })
 
+
+
+
+$.ajaxSetup({
+    beforeSend : function(xhr) {
+        xhr.setRequestHeader('Order-queue', order_queue) ;
+        xhr.setRequestHeader('Provider-name', provider_name);
+    }
+});
+
+// Requette ajax appeler a intervalle regulier pour recuperer les messages
+// RabbitMQ
 function updateRequest(url) {
     $.ajax({
         url: url,
         method: "GET",
         data: {},
         success: function (data) {
-            data.forEach(e => {
-
-            });
             update(data)
         }
     });
