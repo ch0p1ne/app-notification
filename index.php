@@ -4,7 +4,7 @@
 
 // ### Debugage
 if(!isset($_SESSION["userid"]) || !($_SESSION["userid"] != ""))
-    header('Location: ./public/src/html/login/login.php', true, 301);
+    header('Location: ./src/html/login/login.php', true, 301);
 var_dump($_SESSION['sess_userrole']);
 var_dump($_SESSION['sess_name']);
 if(isset($_SESSION['provider_name'])) 
