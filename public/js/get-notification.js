@@ -41,30 +41,6 @@ function updateRequest(url) {
     console.log("fin de la quete ajax, mise a jour du contenue ...");
 
     var row = ""
-
-    orders.forEach(order => {
-        row += "<table>"
-        row += "<caption> Commande numéro :" + orders.indexOf(order) + "</caption>"
-        row += "<thead> " +
-                "<tr>" +
-                    "<td> Nom des produit </td>" +
-                    "<td> Detail de commande </td>" +
-                    "<td> Quantité </td>" +
-                    "<td> ETAT </td>" +
-                "</tr>" +
-            "</thead>"
-        order.forEach(product => {
-            product.forEach(item => {
-                row += '<tr>' +
-                    '<td>' + item.product_name + '</td>'+
-                    '<td>' + "item." + '</td>'+
-                    '<td>' + item.product_qte + '</td>'+
-                    '<td>' + "En cours de livraison" + '</td>'
-                    + '</tr>'
-            });
-        });
-        row += "</table>"
-    });
     
 
     var tableContainer = document.querySelector('.table-container')
@@ -82,17 +58,17 @@ function update(data) {
         console.log(orders)
     }
 
-    localStorage.orders = JSON.stringify(orders)
+    localStorage.setItem(provider_name, JSON.stringify(orders));
 }
 
 
 function getLocalStorage() {
-    if (localStorage.orders) {
-        orders = JSON.parse(localStorage.orders);
-        console.log("Recuperation dans le localstorage de 'orders'")
+    if (localStorage.getItem(provider_name)) {
+        orders = JSON.parse(localStorage.getItem(provider_name));
+        console.log("Recuperation dans le localstorage de : " + provider_name)
     }
     else {
-        localStorage.setItem('orders', JSON.stringify(orders))
-        console.log("Creation dans le localstorage de 'orders'")
+        localStorage.setItem(provider_name, JSON.stringify(orders))
+        console.log("Creation dans le localstorage de : " +  provider_name)
     }
 }
