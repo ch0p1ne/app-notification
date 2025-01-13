@@ -46,9 +46,9 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 		$_SESSION['sess_userrole'] = $user['position'];
 
 		if ($_SESSION['sess_userrole'] == "provider") {
-			header('Location: /app-notification');
+			header('Location: /');
 		} elseif ($_SESSION['sess_userrole'] == "admin") {
-			header('Location: /app-notification');
+			header('Location: /');
 		}
 
 
