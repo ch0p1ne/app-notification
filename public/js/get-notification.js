@@ -7,10 +7,14 @@ $(document).ready(() => {
     
 
     getLocalStorage();
+    var protocol = "http"
+    var host = "137.184.20.73"
+    var port = "8091"
+    var uri = "/get-notification/command"
     var row = ''
-    const urlJax = "http://127.0.0.1:8090/get-notification/command"
-
     //Requete initial
+
+    const urlJax = protocol + "://" + host + ":" + port + uri
     updateRequest(urlJax)
     // Requette répété à interval regulier apres 7.5 seconde
     setInterval(updateRequest, updateFrequency, urlJax)
